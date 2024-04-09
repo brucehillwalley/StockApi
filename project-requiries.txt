@@ -1,0 +1,33 @@
+Projede SIMPLE TOKEN kullanacağız
+
+
+Model oluşturma sırası(Bağımlılığı az olandan çok olana doğru ilerlemek
+daha kolay olduğu için bu sıra uygun görüldü)
+************************
+
+1- USERS
+2- FIRMS
+3- CATEGORY
+4- BRAND
+5- PRODUCT
+6- SALE
+7- PURCHASE
+
+*******************
+
+Fırms Not:
+*******
+Firma modelinde alıcı mı satıcı mı olduğunu anlamak için 
+STATUS belirlenecek ve bu STATUS kısmı ayrı bir dosyada (CONSTRAINT) 
+Number tipinde (key) belirlenecek
+Örneğin firmStatus = {
+1: "SUPPLIER",
+2: "CUSTOMER"
+} gibi
+
+bu kısımlar başarılı bir şekilde oluişturulduktan sonra proje hatasız çalışınca
+bir sonraki adım olarak BÜTÇE kısmı eklenecek
+
+ÖNEMLİ NOT: LÜTFEN KURGU YETENEKLERİMİZİ PROJENİN İLERLEYEN SAFHALARINDA
+PAYLAŞARAK PROJEYİ ZENGİNLEŞTİRME GAYRETİNDE OLALIM 
+ŞİMDİDEN TEŞEKKÜRLER İYİ ÇALIŞMALAR 

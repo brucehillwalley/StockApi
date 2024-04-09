@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
 // sync():
 
@@ -8,7 +8,7 @@ module.exports = async function () {
 
     // return null;
 
-    /* REMOVE DATABASE *
+    /* REMOVE DATABASE */
     const { mongoose } = require('../configs/dbConnection')
     await mongoose.connection.dropDatabase()
     console.log('- Database and all data DELETED!')
@@ -18,37 +18,37 @@ module.exports = async function () {
     const User = require('../models/user')
     await User.deleteMany() // !!! Clear collection.
     await User.create({
-        "_id": "65343222b67e9681f937f001",
+        
         "username": "admin",
         "password": "aA?123456",
         "email": "admin@site.com",
-        "first_name": "admin",
-        "last_name": "admin",
-        "is_active": true,
-        "is_staff": true,
-        "is_superadmin": true
+        "firstName": "admin",
+        "lastName": "admin",
+        "isActive": true,
+        "isStaff": true,
+        "isAdmin": true
     })
     await User.create({
-        "_id": "65343222b67e9681f937f002",
+   
         "username": "staff",
         "password": "aA?123456",
         "email": "staff@site.com",
-        "first_name": "staff",
-        "last_name": "staff",
-        "is_active": true,
-        "is_staff": true,
-        "is_superadmin": false
+        "firstName": "staff",
+        "lastName": "staff",
+        "isActive": true,
+        "isStaff": true,
+        "isAdmin": false
     })
     await User.create({
-        "_id": "65343222b67e9681f937f003",
+       
         "username": "test",
         "password": "aA?123456",
         "email": "test@site.com",
-        "first_name": "test",
-        "last_name": "test",
-        "is_active": true,
-        "is_staff": false,
-        "is_superadmin": false
+        "firstName": "test",
+        "lastName": "test",
+        "isActive": true,
+        "isStaff": false,
+        "isAdmin": false
     })
 
     /* Brand *
