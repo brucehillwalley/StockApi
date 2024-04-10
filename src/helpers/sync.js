@@ -8,13 +8,13 @@ module.exports = async function () {
 
     // return null;
 
-    /* REMOVE DATABASE */
+    /* REMOVE DATABASE *
     const { mongoose } = require('../configs/dbConnection')
     await mongoose.connection.dropDatabase()
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
 
-    /* User */
+    /* User *
     const User = require('../models/user')
     await User.deleteMany() // !!! Clear collection.
     await User.create({
@@ -50,6 +50,7 @@ module.exports = async function () {
         "isStaff": false,
         "isAdmin": false
     })
+  /* User */
 
     /* Brand *
     const Brand = require('../models/brand')
@@ -130,7 +131,7 @@ module.exports = async function () {
         "name": "Electronic",
     })
 
-    /* Firm *
+    /* Firm */
     const Firm = require('../models/firm')
     await Firm.deleteMany() // !!! Clear collection.
     await Firm.create({
@@ -145,7 +146,7 @@ module.exports = async function () {
         "name": "FLO",
         "phone": "0212 444 22 23",
         "image": "https://akillifabrikalar.com.tr/wp-content/uploads/2021/11/Floo2.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
+        "address": "Mahmutbey, Taşocağı Yolu Cad. No:21, 34218 Bağcılar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f304",
@@ -159,42 +160,42 @@ module.exports = async function () {
         "name": "Trendyol",
         "phone": "0212 444 22 22",
         "image": "https://seeklogo.com/images/T/trendyol-logo-EE0DAED204-seeklogo.com.png",
-        "address": "Maslak, Büyükdere Cd. No:237, 34485 Sarıyer/İstanbul, Türkiye"
+        "address": "Maslak, Büyükdere Cd. No:200, 34485 Sarıyer/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f310",
         "name": "n11",
         "phone": "0212 444 22 66",
         "image": "https://i.pinimg.com/originals/af/d7/12/afd7126448b385ea3013d41797adde20.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
+        "address": "Mahmutbey, Taşocağı Yolu Cad. No:25, 34218 Bağcılar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f315",
         "name": "Morhipo",
         "phone": "0212 444 44 44",
         "image": "https://upload.wikimedia.org/wikipedia/tr/archive/3/32/20181016101908%21Morhipo.png",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 244/A, 34396 Sarıyer/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f333",
         "name": "ÜLker",
         "phone": "2124445566",
         "image": "https://www.ulker.com.tr/documents/ulker-logo.png",
-        "address": "Kısıklı, Ferah Cd. No:1, 34692 Üsküdar/İstanbul, Türkiye"
+        "address": "Kısıklı, Ferah Cd. No:2, 34692 Üsküdar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f334",
         "name": "Eti",
         "phone": "0212 444 00 53",
         "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Eti_logo.png",
-        "address": "Uğur Mumcu, 2271. Sk. No:15, 34270 Sultangazi/İstanbul, Türkiye"
+        "address": "Uğur Mumcu, 2271. Sk. No:16, 34270 Sultangazi/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f335",
         "name": "Çetinkaya",
         "phone": "0212 444 00 55",
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU1Mug9ruTOC1x8LGeNAr-ouWrWm29Z6u91QMU8ZfE&s",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 243/A, 34396 Sarıyer/İstanbul, Türkiye"
     })
 
     /* Product *
