@@ -1,6 +1,16 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const router = require('express').Router()
+const router = require("express").Router();
+const category = require("../controllers/category");
 /* ------------------------------------------------------- */
+router.route("/").get(category.list).post(category.create);
+router
+  .route("/:categoryId")
+  .get(category.read)
+  .put(category.update)
+  .patch(category.update)
+  .delete(category.delete);
+
+module.exports = router;

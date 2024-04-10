@@ -131,7 +131,7 @@ module.exports = async function () {
         "name": "Electronic",
     })
 
-    /* Firm */
+    /* Firm *
     const Firm = require('../models/firm')
     await Firm.deleteMany() // !!! Clear collection.
     await Firm.create({
