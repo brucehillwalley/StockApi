@@ -1,19 +1,28 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const router = require('express').Router()
+const router = require("express").Router();
 /* ------------------------------------------------------- */
-const user = require("../controllers/user")
+// routes/user:
 
-router.route("/")
-.get(user.list)
-.post(user.create)
+const permissions = require("../middlewares/permissions");
+const user = require("../controllers/user");
 
-router.route("/:userId")
-.get(user.read)
-.put(user.update)
-.patch(user.update)
-.delete(user.delete)
+// URL: /users
 
-module.exports = router
+router
+  .route("/")
+  //? user.list içinde isAdmin kontrolü yaptık:
+  .get(permissions.isLogin, user.list)
+  .post(user.create);
+
+router
+  .route("/:id")
+  .get(permissions.isLogin, user.read)
+  .put(permissions.isLogin, user.update)
+  .patch(permissions.isLogin, user.update)
+  .delete(permissions.isAdmin, user.delete);
+
+/* ------------------------------------------------------- */
+module.exports = router;

@@ -14,30 +14,36 @@ const UserSchema = new Schema(
     username: {
       type: String,
       required: true,
+      trim: true,
       unique: true,
       index: true,
     },
 
     password: {
       type: String,
+      trim: true,
       required: true,
       set: (password) => passwordValidation(password), //! password validation and encrypt
     },
 
     email: {
       type: String,
+      trim: true,
       required: true,
       unique: true,
       set: (email) => emailValidation(email), //! email validation
+      index: true,
     },
 
     firstName: {
       type: String,
+      trim: true,
       required: true,
     },
 
     lastName: {
       type: String,
+      trim: true,
       required: true,
     },
 
@@ -48,7 +54,7 @@ const UserSchema = new Schema(
 
     isStaff: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     isAdmin: {
@@ -62,6 +68,7 @@ const UserSchema = new Schema(
   }
 );
 
+/* ------------------------------------------------------- */
 module.exports = model("User", UserSchema);
 
 // UserSchema.pre(['save', 'updateOne'], function (next) {
