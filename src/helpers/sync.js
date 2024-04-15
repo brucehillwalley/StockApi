@@ -14,11 +14,11 @@ module.exports = async function () {
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
 
-    /* User *
+    /* User */
     const User = require('../models/user')
     await User.deleteMany() // !!! Clear collection.
     await User.create({
-        
+        "_id": "65343222b67e9681f937f001",
         "username": "admin",
         "password": "aA?123456",
         "email": "admin@site.com",
@@ -29,7 +29,7 @@ module.exports = async function () {
         "isAdmin": true
     })
     await User.create({
-   
+        "_id": "65343222b67e9681f937f002",
         "username": "staff",
         "password": "aA?123456",
         "email": "staff@site.com",
@@ -40,7 +40,7 @@ module.exports = async function () {
         "isAdmin": false
     })
     await User.create({
-       
+        "_id": "65343222b67e9681f937f003",
         "username": "test",
         "password": "aA?123456",
         "email": "test@site.com",
@@ -50,7 +50,6 @@ module.exports = async function () {
         "isStaff": false,
         "isAdmin": false
     })
-  /* User */
 
     /* Brand *
     const Brand = require('../models/brand')
@@ -146,7 +145,7 @@ module.exports = async function () {
         "name": "FLO",
         "phone": "0212 444 22 23",
         "image": "https://akillifabrikalar.com.tr/wp-content/uploads/2021/11/Floo2.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:21, 34218 Bağcılar/İstanbul, Türkiye"
+        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f304",
@@ -160,42 +159,42 @@ module.exports = async function () {
         "name": "Trendyol",
         "phone": "0212 444 22 22",
         "image": "https://seeklogo.com/images/T/trendyol-logo-EE0DAED204-seeklogo.com.png",
-        "address": "Maslak, Büyükdere Cd. No:200, 34485 Sarıyer/İstanbul, Türkiye"
+        "address": "Maslak, Büyükdere Cd. No:237, 34485 Sarıyer/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f310",
         "name": "n11",
         "phone": "0212 444 22 66",
         "image": "https://i.pinimg.com/originals/af/d7/12/afd7126448b385ea3013d41797adde20.png",
-        "address": "Mahmutbey, Taşocağı Yolu Cad. No:25, 34218 Bağcılar/İstanbul, Türkiye"
+        "address": "Mahmutbey, Taşocağı Yolu Cad. No:24, 34218 Bağcılar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f315",
         "name": "Morhipo",
         "phone": "0212 444 44 44",
         "image": "https://upload.wikimedia.org/wikipedia/tr/archive/3/32/20181016101908%21Morhipo.png",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 244/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f333",
         "name": "ÜLker",
         "phone": "2124445566",
         "image": "https://www.ulker.com.tr/documents/ulker-logo.png",
-        "address": "Kısıklı, Ferah Cd. No:2, 34692 Üsküdar/İstanbul, Türkiye"
+        "address": "Kısıklı, Ferah Cd. No:1, 34692 Üsküdar/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f334",
         "name": "Eti",
         "phone": "0212 444 00 53",
         "image": "https://upload.wikimedia.org/wikipedia/commons/c/c3/Eti_logo.png",
-        "address": "Uğur Mumcu, 2271. Sk. No:16, 34270 Sultangazi/İstanbul, Türkiye"
+        "address": "Uğur Mumcu, 2271. Sk. No:15, 34270 Sultangazi/İstanbul, Türkiye"
     })
     await Firm.create({
         "_id": "65343222b67e9681f937f335",
         "name": "Çetinkaya",
         "phone": "0212 444 00 55",
         "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRU1Mug9ruTOC1x8LGeNAr-ouWrWm29Z6u91QMU8ZfE&s",
-        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 243/A, 34396 Sarıyer/İstanbul, Türkiye"
+        "address": "B01-Z02 Maslak Büyükdere Cad. Uso Center 245/A, 34396 Sarıyer/İstanbul, Türkiye"
     })
 
     /* Product *
@@ -204,37 +203,37 @@ module.exports = async function () {
     await Product.create({
         "_id": "65343222b67e9681f937f421",
         "name": "Tommy",
-        "category_id": "65343222b67e9681f937f203",
-        "brand_id": "65343222b67e9681f937f107",
-        "stock": 0
+        "categoryId": "65343222b67e9681f937f203",
+        "brandId": "65343222b67e9681f937f107",
+        "quantity": 0
     })
     await Product.create({
         "_id": "65343222b67e9681f937f422",
         "name": "Link",
-        "category_id": "65343222b67e9681f937f202",
-        "brand_id": "65343222b67e9681f937f123",
-        "stock": 910
+        "categoryId": "65343222b67e9681f937f202",
+        "brandId": "65343222b67e9681f937f123",
+        "quantity": 910
     })
     await Product.create({
         "_id": "65343222b67e9681f937f423",
         "name": "Cola Turka",
-        "category_id": "65343222b67e9681f937f202",
-        "brand_id": "65343222b67e9681f937f123",
-        "stock": 750
+        "categoryId": "65343222b67e9681f937f202",
+        "brandId": "65343222b67e9681f937f123",
+        "quantity": 750
     })
     await Product.create({
         "_id": "65343222b67e9681f937f426",
         "name": "Rondo",
-        "category_id": "65343222b67e9681f937f201",
-        "brand_id": "65343222b67e9681f937f123",
-        "stock": 900
+        "categoryId": "65343222b67e9681f937f201",
+        "brandId": "65343222b67e9681f937f123",
+        "quantity": 900
     })
     await Product.create({
         "_id": "65343222b67e9681f937f427",
         "name": "Iphone 14 Pro",
-        "category_id": "65343222b67e9681f937f204",
-        "brand_id": "65343222b67e9681f937f131",
-        "stock": 0
+        "categoryId": "65343222b67e9681f937f204",
+        "brandId": "65343222b67e9681f937f131",
+        "quantity": 0
     })
 
     /* Purchase *
@@ -244,7 +243,7 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f513",
         "user_id": "65343222b67e9681f937f001",
         "firm_id": "65343222b67e9681f937f304",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f422",
         "quantity": 1000,
         "price": 20
@@ -253,7 +252,7 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f514",
         "user_id": "65343222b67e9681f937f001",
         "firm_id": "65343222b67e9681f937f304",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f423",
         "quantity": 1000,
         "price": 30
@@ -262,7 +261,7 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f516",
         "user_id": "65343222b67e9681f937f001",
         "firm_id": "65343222b67e9681f937f304",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f426",
         "quantity": 1000,
         "price": 5
@@ -271,7 +270,7 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f519",
         "user_id": "65343222b67e9681f937f002",
         "firm_id": "65343222b67e9681f937f333",
-        "brand_id": "65343222b67e9681f937f104",
+        "brandId": "65343222b67e9681f937f104",
         "product_id": "65343222b67e9681f937f422",
         "quantity": 10,
         "price": 100
@@ -280,7 +279,7 @@ module.exports = async function () {
         "_id": "65343222b67e9681f937f520",
         "user_id": "65343222b67e9681f937f001",
         "firm_id": "65343222b67e9681f937f305",
-        "brand_id": "65343222b67e9681f937f131",
+        "brandId": "65343222b67e9681f937f131",
         "product_id": "65343222b67e9681f937f427",
         "quantity": 10,
         "price": 2500
@@ -292,7 +291,7 @@ module.exports = async function () {
     await Sale.create({
         "_id": "65343222b67e9681f937f614",
         "user_id": "65343222b67e9681f937f001",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f422",
         "quantity": 100,
         "price": 30
@@ -300,7 +299,7 @@ module.exports = async function () {
     await Sale.create({
         "_id": "65343222b67e9681f937f615",
         "user_id": "65343222b67e9681f937f001",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f423",
         "quantity": 250,
         "price": 40
@@ -308,7 +307,7 @@ module.exports = async function () {
     await Sale.create({
         "_id": "65343222b67e9681f937f617",
         "user_id": "65343222b67e9681f937f001",
-        "brand_id": "65343222b67e9681f937f123",
+        "brandId": "65343222b67e9681f937f123",
         "product_id": "65343222b67e9681f937f426",
         "quantity": 100,
         "price": 6
@@ -316,7 +315,7 @@ module.exports = async function () {
     await Sale.create({
         "_id": "65343222b67e9681f937f624",
         "user_id": "65343222b67e9681f937f001",
-        "brand_id": "65343222b67e9681f937f131",
+        "brandId": "65343222b67e9681f937f131",
         "product_id": "65343222b67e9681f937f427",
         "quantity": 10,
         "price": 3500
