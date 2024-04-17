@@ -21,7 +21,7 @@ const FirmSchema = new Schema({
     address: {
         type: String,
         required: true,
-        unique: true,
+     
     },
 
     image: {

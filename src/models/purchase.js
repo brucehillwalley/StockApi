@@ -29,6 +29,10 @@ const PurchaseSchema = new mongoose.Schema({
         ref: 'Product',
         required: true
     },
+    price:{
+        type: Number,
+        required: true
+    },
     quantity:{
         type: Number,
         default: 1,
