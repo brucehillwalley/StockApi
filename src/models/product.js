@@ -25,11 +25,15 @@ const ProductSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-
+   price: {
+      type: Number,
+      required: true,
+    },
     quantity: {
       type: Number,
       default: 0,
-    },
+    }
+ 
   },
   {
     collection: "products",
