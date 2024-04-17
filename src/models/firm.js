@@ -41,5 +41,6 @@ const FirmSchema = new Schema({
 }, 
 { timestamps: true,
 collection: "firms"})
+/* ------------------------------------------------------- */
 
 module.exports = model('Firm', FirmSchema)
