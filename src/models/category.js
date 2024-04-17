@@ -11,6 +11,7 @@ const CategorySchema = new Schema({
         trim: true,
         required: true,
         index: true,
+        unique: true,
         set:(name) => name.toUpperCase()
     }
 }, {
