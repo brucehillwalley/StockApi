@@ -1,20 +1,41 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | STOCK MANAGEMENT API
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-const { mongoose:{ Schema, model} } = require('../configs/dbConnection')
+const { mongoose } = require("../configs/dbConnection");
 /* ------------------------------------------------------- */
-const ProductSchema = new Schema({
+// Product Model:
+
+const ProductSchema = new mongoose.Schema(
+  {
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+      required: true,
+    },
+
+    brandId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Brand",
+      required: true,
+    },
+
     name: {
-        type: String,
-        trim: true,
-        required: true,
-        index: true
-    }
+      type: String,
+      trim: true,
+      required: true,
+    },
 
+    quantity: {
+      type: Number,
+      default: 0,
+    },
+  },
+  {
+    collection: "products",
+    timestamps: true,
+  }
+);
 
-
-
-},{ collection:"products", timestamps: true })
-
-module.exports = model("Product", ProductSchema)
+/* ------------------------------------------------------- */
+module.exports = mongoose.model("Product", ProductSchema);
