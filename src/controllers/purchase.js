@@ -1,15 +1,15 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 // Purchase Controller:
 
-const Purchase = require('../models/purchase');
+const Purchase = require("../models/purchase");
+const { populate } = require("../models/sale");
 
 module.exports = {
-
-    list: async (req, res) => {
-        /*
+  list: async (req, res) => {
+    /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "List Purchases"
             #swagger.description = `
@@ -23,17 +23,22 @@ module.exports = {
             `
         */
 
-        const data = await res.getModelList(Purchase)
+    const data = await res.getModelList(Purchase, {}, [
+      { path: "userId", select: "username email" },
+      { path: "firmId", select: "name image" },
+      brandId,
+      { path: "productId", select: "name", populate: { path: "categoryId" } },
+    ]);
 
-        res.status(200).send({
-            error: false,
-            details: await res.getModelListDetails(Purchase),
-            data
-        })
-    },
+    res.status(200).send({
+      error: false,
+      details: await res.getModelListDetails(Purchase),
+      data,
+    });
+  },
 
-    create: async (req, res) => {
-        /*
+  create: async (req, res) => {
+    /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Create Purchase"
             #swagger.parameters['body'] = {
@@ -45,46 +50,52 @@ module.exports = {
             }
         */
 
-        const data = await Purchase.create(req.body)
+    // userId verisini req.user dan al
+    req.body.userId = req.user._id;
+    
+    const data = await Purchase.create(req.body);
 
-        res.status(201).send({
-            error: false,
-            data
-        })
-    },
+    res.status(201).send({
+      error: false,
+      data,
+    });
+  },
 
-    read: async (req, res) => {
-        /*
+  read: async (req, res) => {
+    /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Get Single Purchase"
         */
 
-        console.log('read run')
+    console.log("read run");
 
-        if (req.params?.id) {
-        // Single:
-            const data = await Purchase.findOne({ _id: req.params.id })
+    if (req.params?.id) {
+      // Single:
+      const data = await Purchase.findOne({ _id: req.params.id });
 
-            res.status(200).send({
-                error: false,
-                data
-            })
+      res.status(200).send({
+        error: false,
+        data,
+      });
+    } else {
+      // All:
+      const data = await res.getModelList(Purchase, {}, [
+        { path: "userId", select: "username email" },
+        { path: "firmId", select: "name image" },
+        brandId,
+        { path: "productId", select: "name", populate: { path: "categoryId" } },
+      ]);
 
-        } else {
-        // All:
-            const data = await res.getModelList(Purchase)
+      res.status(200).send({
+        error: false,
+        details: await res.getModelListDetails(Purchase),
+        data,
+      });
+    }
+  },
 
-            res.status(200).send({
-                error: false,
-                details: await res.getModelListDetails(Purchase),
-                data
-            })
-        }
-
-    },
-
-    update: async (req, res) => {
-        /*
+  update: async (req, res) => {
+    /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Update Purchase"
             #swagger.parameters['body'] = {
@@ -96,28 +107,28 @@ module.exports = {
             }
         */
 
-        const data = await Purchase.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+    const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {
+      runValidators: true,
+    });
 
-        res.status(202).send({
-            error: false,
-            data,
-            new: await Purchase.findOne({ _id: req.params.id })
-        })
-    },
+    res.status(202).send({
+      error: false,
+      data,
+      new: await Purchase.findOne({ _id: req.params.id }),
+    });
+  },
 
-    delete: async (req, res) => {
-        /*
+  delete: async (req, res) => {
+    /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Delete Purchase"
         */
 
-        const data = await Purchase.deleteOne({ _id: req.params.id })
+    const data = await Purchase.deleteOne({ _id: req.params.id });
 
-        res.status(data.deletedCount ? 204 : 404).send({
-            error: !data.deletedCount,
-            data
-        })
-
-    },
-
-}
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+    });
+  },
+};
