@@ -1,15 +1,16 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
 // Purchase Controller:
 
-const Purchase = require("../models/purchase");
-const { populate } = require("../models/sale");
+const Purchase = require('../models/purchase');
+const Product = require('../models/product');
 
 module.exports = {
-  list: async (req, res) => {
-    /*
+
+    list: async (req, res) => {
+        /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "List Purchases"
             #swagger.description = `
@@ -23,22 +24,22 @@ module.exports = {
             `
         */
 
-    const data = await res.getModelList(Purchase, {}, [
-      { path: "userId", select: "username email" },
-      { path: "firmId", select: "name image" },
-      brandId,
-      { path: "productId", select: "name", populate: { path: "categoryId" } },
-    ]);
+        const data = await res.getModelList(Purchase, {}, [
+            { path: 'userId', select: 'username email' },
+            { path: 'firmId', select: 'name image' },
+            'brandId',
+            { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+        ])
 
-    res.status(200).send({
-      error: false,
-      details: await res.getModelListDetails(Purchase),
-      data,
-    });
-  },
+        res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails(Purchase),
+            data
+        })
+    },
 
-  create: async (req, res) => {
-    /*
+    create: async (req, res) => {
+        /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Create Purchase"
             #swagger.parameters['body'] = {
@@ -50,52 +51,64 @@ module.exports = {
             }
         */
 
-    // userId verisini req.user dan al
-    req.body.userId = req.user._id;
-    
-    const data = await Purchase.create(req.body);
+        // userId verisini req.user'dan al:
+        req.body.userId = req.user._id
 
-    res.status(201).send({
-      error: false,
-      data,
-    });
-  },
+        // Create:
+        const data = await Purchase.create(req.body)
+        
+        // Satınalma sonrası güncel stok adedini arttır:
+        // const updateProduct = await Product.updateOne({ _id: req.body.productId }, { $inc: { quantity: req.body.quantity } })
+        const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: +data.quantity } })
 
-  read: async (req, res) => {
-    /*
+        res.status(201).send({
+            error: false,
+            data
+        })
+    },
+
+    read: async (req, res) => {
+        /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Get Single Purchase"
         */
 
-    console.log("read run");
+        console.log('read run')
 
-    if (req.params?.id) {
-      // Single:
-      const data = await Purchase.findOne({ _id: req.params.id });
+        if (req.params?.id) {
+        // Single:
+            const data = await Purchase.findOne({ _id: req.params.id }).populate([
+                { path: 'userId', select: 'username email' },
+                { path: 'firmId', select: 'name image' },
+                'brandId',
+                { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+            ])
 
-      res.status(200).send({
-        error: false,
-        data,
-      });
-    } else {
-      // All:
-      const data = await res.getModelList(Purchase, {}, [
-        { path: "userId", select: "username email" },
-        { path: "firmId", select: "name image" },
-        brandId,
-        { path: "productId", select: "name", populate: { path: "categoryId" } },
-      ]);
+            res.status(200).send({
+                error: false,
+                data
+            })
 
-      res.status(200).send({
-        error: false,
-        details: await res.getModelListDetails(Purchase),
-        data,
-      });
-    }
-  },
+        } else {
+        // All:
+            const data = await res.getModelList(Purchase, {}, [
+                { path: 'userId', select: 'username email' },
+                { path: 'firmId', select: 'name image' },
+                'brandId',
+                { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+            ])
 
-  update: async (req, res) => {
-    /*
+            res.status(200).send({
+                error: false,
+                details: await res.getModelListDetails(Purchase),
+                data
+            })
+        }
+
+    },
+
+    update: async (req, res) => {
+        /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Update Purchase"
             #swagger.parameters['body'] = {
@@ -107,28 +120,45 @@ module.exports = {
             }
         */
 
-    const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true,
-    });
+        if (req.body?.quantity) {
+            // mevcut adet bilgisini al:
+            const currentPurchase = await Purchase.findOne({ _id: req.params.id })
+            // farkı bul:
+            const difference = req.body.quantity - currentPurchase.quantity
+            // farkı Product'a kaydet:
+            const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: +difference } })
+        }
 
-    res.status(202).send({
-      error: false,
-      data,
-      new: await Purchase.findOne({ _id: req.params.id }),
-    });
-  },
+        // Update:
+        const data = await Purchase.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
 
-  delete: async (req, res) => {
-    /*
+        res.status(202).send({
+            error: false,
+            data,
+            new: await Purchase.findOne({ _id: req.params.id })
+        })
+    },
+
+    delete: async (req, res) => {
+        /*
             #swagger.tags = ["Purchases"]
             #swagger.summary = "Delete Purchase"
         */
 
-    const data = await Purchase.deleteOne({ _id: req.params.id });
+        // mevcut adet bilgisini al:
+        const currentPurchase = await Purchase.findOne({ _id: req.params.id })
 
-    res.status(data.deletedCount ? 204 : 404).send({
-      error: !data.deletedCount,
-      data,
-    });
-  },
-};
+        // Delete:
+        const data = await Purchase.deleteOne({ _id: req.params.id })
+
+        // Adeti Product'dan eksilt:
+        const updateProduct = await Product.updateOne({ _id: currentPurchase.productId }, { $inc: { quantity: -currentPurchase.quantity } })
+
+        res.status(data.deletedCount ? 204 : 404).send({
+            error: !data.deletedCount,
+            data
+        })
+
+    },
+
+}

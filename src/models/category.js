@@ -2,21 +2,24 @@
 /* -------------------------------------------------------
     NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const { mongoose:{ Schema, model} } = require('../configs/dbConnection')
+const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- */
-const CategorySchema = new Schema({
+// Category Model:
+
+const CategorySchema = new mongoose.Schema({
 
     name: {
         type: String,
         trim: true,
         required: true,
-        index: true,
         unique: true,
-        set:(name) => name.toUpperCase()
+        set: name => name.toUpperCase()
     }
+
 }, {
-    collection:"categories",
+    collection: 'categories',
     timestamps: true
 })
 
-module.exports = model("Category", CategorySchema)
+/* ------------------------------------------------------- */
+module.exports = mongoose.model('Category', CategorySchema)

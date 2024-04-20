@@ -38,15 +38,32 @@ const SaleSchema = new mongoose.Schema({
 
     amount: {
         type: Number,
-        set: function() { return this.price * this.quantity },
-        default: function() { return this.price * this.quantity },
-        transform: function() { return this.price * this.quantity },
+        set: function () { return this.price * this.quantity },
+        default: function () { return this.price * this.quantity },
+        transform: function () { return this.price * this.quantity },
     },
 
 
 }, {
     collection: 'Sales',
     timestamps: true
+})
+
+/* ------------------------------------------------------- */
+// https://mongoosejs.com/docs/middleware.html
+
+// pre('init') -> Ekrana veriyi vermeden önce veriyi (çıktıyı) manipule edebiliriz:
+// middleware değil, next gerek yok:
+SaleSchema.pre('init', function (document) {
+    // console.log(document)
+    document.extraField = 'Cohort 15'
+    document.__v = undefined
+    // toLocaleDateString:
+    // https://www.w3schools.com/jsref/jsref_tolocalestring.asp
+    document.createdAtStr = document.createdAt.toLocaleString('tr-tr', { dateStyle: 'full', timeStyle: 'medium' })
+    document.updatedAtStr = document.updatedAt.toLocaleString('tr-tr', { dateStyle: 'full', timeStyle: 'medium' })
+    // document.createdAt = undefined
+    // document.updatedAt = undefined
 })
 
 /* ------------------------------------------------------- */

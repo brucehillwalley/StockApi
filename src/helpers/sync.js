@@ -6,7 +6,7 @@
 
 module.exports = async function () {
 
-    return null;
+    // return null;
 
     /* REMOVE DATABASE */
     const { mongoose } = require('../configs/dbConnection')
@@ -16,7 +16,7 @@ module.exports = async function () {
 
     /* User */
     const User = require('../models/user')
-    await User.deleteMany() // !!! Clear collection.
+    // await User.deleteMany() // !!! Clear collection.
     await User.create({
         "_id": "65343222b67e9681f937f001",
         "username": "admin",
@@ -53,7 +53,7 @@ module.exports = async function () {
 
     /* Brand */
     const Brand = require('../models/brand')
-    await Brand.deleteMany() // !!! Clear collection.
+    // await Brand.deleteMany() // !!! Clear collection.
     await Brand.create({
         "_id": "65343222b67e9681f937f104",
         "name": "Adidas",
@@ -112,7 +112,7 @@ module.exports = async function () {
 
     /* Category */
     const Category = require('../models/category')
-    await Category.deleteMany() // !!! Clear collection.
+    // await Category.deleteMany() // !!! Clear collection.
     await Category.create({
         "_id": "65343222b67e9681f937f201",
         "name": "Food",
@@ -132,7 +132,7 @@ module.exports = async function () {
 
     /* Firm */
     const Firm = require('../models/firm')
-    await Firm.deleteMany() // !!! Clear collection.
+    // await Firm.deleteMany() // !!! Clear collection.
     await Firm.create({
         "_id": "65343222b67e9681f937f302",
         "name": "BOYNER",
@@ -199,7 +199,7 @@ module.exports = async function () {
 
     /* Product */
     const Product = require('../models/product')
-    await Product.deleteMany() // !!! Clear collection.
+    // await Product.deleteMany() // !!! Clear collection.
     await Product.create({
         "_id": "65343222b67e9681f937f421",
         "name": "Tommy",
@@ -243,7 +243,7 @@ module.exports = async function () {
 
     /* Purchase */
     const Purchase = require('../models/purchase')
-    await Purchase.deleteMany() // !!! Clear collection.
+    // await Purchase.deleteMany() // !!! Clear collection.
     await Purchase.create({
         "_id": "65343222b67e9681f937f513",
         "userId": "65343222b67e9681f937f001",
@@ -292,7 +292,7 @@ module.exports = async function () {
 
     /* Sale */
     const Sale = require('../models/sale')
-    await Sale.deleteMany() // !!! Clear collection.
+    // await Sale.deleteMany() // !!! Clear collection.
     await Sale.create({
         "_id": "65343222b67e9681f937f614",
         "userId": "65343222b67e9681f937f001",

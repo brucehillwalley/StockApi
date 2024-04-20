@@ -1,18 +1,22 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
     NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const router = require("express").Router();
-const firm = require("../controllers/firm");
+const router = require('express').Router()
 /* ------------------------------------------------------- */
+// routes/firm:
 
-router.route("/").get(firm.list).post(firm.create);
+const firm = require('../controllers/firm')
+const permissions = require('../middlewares/permissions')
 
-router
-  .route("/:firmId")
-  .get(firm.read)
-  .put(firm.update)
-  .patch(firm.update)
-  .delete(firm.delete);
+// URL: /firms
 
-module.exports = router;
+router.route('/(:id)?')
+    .post(permissions.isAdmin, firm.create)
+    .get(permissions.isStaff, firm.read)
+    .put(permissions.isAdmin, firm.update)
+    .patch(permissions.isAdmin, firm.update)
+    .delete(permissions.isAdmin, firm.delete)
+
+/* ------------------------------------------------------- */
+module.exports = router

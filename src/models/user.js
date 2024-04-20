@@ -1,72 +1,98 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
     NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const {
-  mongoose: { Schema, model },
-} = require("../configs/dbConnection");
+const { mongoose } = require('../configs/dbConnection')
+/* ------------------------------------------------------- *
+{
+    "username": "admin",
+    "password": "aA?123456",
+    "email": "admin@site.com",
+    "firstName": "admin",
+    "lastName": "admin",
+    "isActive": true,
+    "isStaff": true,
+    "isAdmin": true
+}
+{
+    "username": "staff",
+    "password": "aA?123456",
+    "email": "staff@site.com",
+    "firstName": "staff",
+    "lastName": "staff",
+    "isActive": true,
+    "isStaff": true,
+    "isAdmin": false
+}
+{
+    "username": "test",
+    "password": "aA?123456",
+    "email": "test@site.com",
+    "firstName": "test",
+    "lastName": "test",
+    "isActive": true,
+    "isStaff": false,
+    "isAdmin": false
+}
 /* ------------------------------------------------------- */
-// const passwordValidation = require("../helpers/passwordValidation");
-// const emailValidation = require("../helpers/emailValidation");
+// User Model:
 
-const UserSchema = new Schema(
-  {
+const UserSchema = new mongoose.Schema({
+
     username: {
-      type: String,
-      required: true,
-      trim: true,
-      unique: true,
-      index: true,
+        type: String,
+        trim: true,
+        required: true,
+        unique: true,
+        index: true
     },
 
     password: {
-      type: String,
-      trim: true,
-      required: true,
-      // set: (password) => passwordValidation(password), //! password validation and encrypt
+        type: String,
+        trim: true,
+        required: true
     },
 
     email: {
-      type: String,
-      trim: true,
-      required: true,
-      unique: true,
-      // set: (email) => emailValidation(email), //! email validation
-      index: true,
+        type: String,
+        trim: true,
+        required: true,
+        unique: true,
+        index: true,
+        // validate: ... // validasyon işlemini pre(save) yapıyor.
     },
 
     firstName: {
-      type: String,
-      trim: true,
-      required: true,
+        type: String,
+        trim: true,
+        required: true
     },
 
     lastName: {
-      type: String,
-      trim: true,
-      required: true,
+        type: String,
+        trim: true,
+        required: true
     },
 
     isActive: {
-      type: Boolean,
-      default: true,
+        type: Boolean,
+        default: true,
     },
 
     isStaff: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     },
 
     isAdmin: {
-      type: Boolean,
-      default: false,
+        type: Boolean,
+        default: false,
     },
-  },
-  {
-    collection: "users",
-    timestamps: true,
-  }
-);
+
+}, {
+    collection: 'users',
+    timestamps: true
+})
 
 /* ------------------------------------------------------- */
 // https://mongoosejs.com/docs/middleware.html
@@ -86,7 +112,7 @@ UserSchema.pre(['save', 'updateOne'], function (next) {
 
     if (isEmailValidated) {
 
-        console.log('Email OK')
+        // console.log('Email OK')
 
         if (data?.password) {
 
@@ -94,7 +120,7 @@ UserSchema.pre(['save', 'updateOne'], function (next) {
 
             if (isPasswordValidated) {
 
-                console.log('Password OK')
+                // console.log('Password OK')
 
                 data.password = passwordEncrypt(data.password)
 
@@ -125,11 +151,7 @@ UserSchema.pre(['save', 'updateOne'], function (next) {
         next(new Error('Email is not validated.'))
     }
 })
+
 /* ------------------------------------------------------- */
-module.exports = model("User", UserSchema);
-
-
-
-
-
-
+// Exports:
+module.exports = mongoose.model('User', UserSchema)

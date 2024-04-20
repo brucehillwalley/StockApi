@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
 // Product Controller:
 
@@ -63,7 +63,7 @@ module.exports = {
 
         if (req.params?.id) {
         // Single:
-            const data = await Product.findOne({ _id: req.params.id })
+            const data = await Product.findOne({ _id: req.params.id }).populate(['categoryId', 'brandId'])
 
             res.status(200).send({
                 error: false,
@@ -72,7 +72,7 @@ module.exports = {
 
         } else {
         // All:
-            const data = await res.getModelList(Product, {},['categoryId', 'brandId'])
+            const data = await res.getModelList(Product, {}, ['categoryId', 'brandId'])
 
             res.status(200).send({
                 error: false,

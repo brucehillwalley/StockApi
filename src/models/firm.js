@@ -2,45 +2,29 @@
 /* -------------------------------------------------------
     NODEJS EXPRESS | STOCK MANAGEMENT API
 ------------------------------------------------------- */
-const { mongoose: { Schema, model } } = require('../configs/dbConnection')
-const { firmStatus } = require('../constraints/role&status')
+const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- */
-const FirmSchema = new Schema({
+// Firm Model:
+
+const FirmSchema = new mongoose.Schema({
+
     name: {
         type: String,
+        trim: true,
         required: true,
-        index: true
+        unique: true
     },
 
-    phone: {
-        type: String,
-        required: true,
-        unique: true,        
-    },
+    phone: String,
 
-    address: {
-        type: String,
-        required: true,
-     
-    },
+    address: String,
 
-    image: {
-        type: String,
-    },
+    image: String
 
-    status: {
-       type: String,
-       trim: true,
-       required: true,
-       enum: {
-        values:Object.keys(firmStatus), 
-        message:"Please enter a valid status"
-    },
-       default: Object.keys(firmStatus)[0]
-    }
-}, 
-{ timestamps: true,
-collection: "firms"})
+}, {
+    collection: 'firms',
+    timestamps: true
+})
+
 /* ------------------------------------------------------- */
-
-module.exports = model('Firm', FirmSchema)
+module.exports = mongoose.model('Firm', FirmSchema)
