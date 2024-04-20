@@ -1,5 +1,6 @@
 # STOCK MANAGEMENT API
-
+    *   pre init sale model'de kullanıldı.
+    *   pre save user model'de kullanıldı.
 ### ERD:
 
 ![ERD](./erdStockAPI.png)
