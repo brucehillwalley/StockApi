@@ -5,7 +5,7 @@
 // Purchase Controller:
 
 const Purchase = require('../models/purchase');
-const Product = require('../models/product');
+const Product = require('../models/product'); // Stock adedi product'da tutuluyor. Satın alma olduğunda güncellenecek.
 
 module.exports = {
 
@@ -51,7 +51,7 @@ module.exports = {
             }
         */
 
-        // userId verisini req.user'dan al:
+        // userId verisini req.user'dan al: (login olan kullanıcı)
         req.body.userId = req.user._id
 
         // Create:
@@ -59,7 +59,7 @@ module.exports = {
         
         // Satınalma sonrası güncel stok adedini arttır:
         // const updateProduct = await Product.updateOne({ _id: req.body.productId }, { $inc: { quantity: req.body.quantity } })
-        const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: +data.quantity } })
+        const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: +data.quantity } }) //? +data.quantity ekleme yapılır. -data.quantity çıkarma "-" yapılır.
 
         res.status(201).send({
             error: false,

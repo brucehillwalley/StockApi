@@ -56,6 +56,7 @@ module.exports = {
         // Güncel ürün bilgisini al:
         const currentProduct = await Product.findOne({ _id: req.body.productId })
 
+        // Satış yapmak için stokta yeteri kadar product var mı?
         if (currentProduct.quantity >= req.body.quantity) {
  
             // Create:
@@ -132,14 +133,14 @@ module.exports = {
             const currentSale = await Sale.findOne({ _id: req.params.id })
             // farkı bul:
             const difference = req.body.quantity - currentSale.quantity
-            // farkı Product'a kaydet:
+            // farkı Product'a kaydet: product adedi satış için yeterli ise güncelleme yapacak => quantity: { $gte: difference }
             const updateProduct = await Product.updateOne({ _id: currentSale.productId, quantity: { $gte: difference } }, { $inc: { quantity: -difference } })
             // console.log(updateProduct)
 
             // Update işlemi olmamışsa, hata verdir. hata verince sistem devam etmeyecektir:,
             if (updateProduct.modifiedCount == 0) {
                 res.errorStatusCode = 422
-                throw new Error('There is not enough product-quantity for this sale.')
+                throw new Error('There is not enough product-quantity for this sale update.')
             }
         }
 
