@@ -44,9 +44,9 @@ const PurchaseSchema = new mongoose.Schema({
 
     amount: {
         type: Number,
-        set: function() { return this.price * this.quantity },
-        default: function() { return this.price * this.quantity },
-        transform: function() { return this.price * this.quantity },
+        set: function() { return this.price * this.quantity },  // for create ()
+        default: function() { return this.price * this.quantity }, // not working update
+        transform: function() { return this.price * this.quantity },  // for update
     },
 
 

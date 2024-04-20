@@ -28,7 +28,7 @@ module.exports = {
             { path: 'userId', select: 'username email' },
             { path: 'firmId', select: 'name image' },
             'brandId',
-            { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+            { path: 'productId', select: 'name', populate: { path: 'categoryId' } }, //? Nested populate
         ])
 
         res.status(200).send({
@@ -81,7 +81,7 @@ module.exports = {
                 { path: 'userId', select: 'username email' },
                 { path: 'firmId', select: 'name image' },
                 'brandId',
-                { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+                { path: 'productId', select: 'name', populate: { path: 'categoryId' } }, //? Nested populate
             ])
 
             res.status(200).send({
@@ -95,7 +95,7 @@ module.exports = {
                 { path: 'userId', select: 'username email' },
                 { path: 'firmId', select: 'name image' },
                 'brandId',
-                { path: 'productId', select: 'name', populate: { path: 'categoryId' } },
+                { path: 'productId', select: 'name', populate: { path: 'categoryId' } }, //? Nested populate
             ])
 
             res.status(200).send({
